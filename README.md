@@ -52,3 +52,38 @@ nasm -f elf64 recaman.asm -o recaman.o
 ld recaman.o -o recaman
 ~~~
 This will create an executable file named recaman. You can run it with the command ./recaman to generate the first 100 terms of Recamán's sequence.
+
+Here's an example test case for the Recamán's sequence program above:
+~~~
+#!/bin/bash
+
+# Build the Recamán program
+nasm -f elf64 recaman.asm -o recaman.o
+ld recaman.o -o recaman
+
+# Define expected output
+EXPECTED="0,1,3,6,2,7,13,20,12,21,11,22,10,23,9,24,8,25,43,62,42,63,41,18,42,17,43,16,44,15,45,14,46,79,113,78,114,77,39,78,38,79,37,80,36,81,35,82,34,83,33,84,32,85,31,86,30,87,29,88,28,89,120,152,119,153,118,154,117,58,118,57,119,56,120,55,121,54,122,53,123,52,124,51,125,50,126,49,127,48,128,47,129,46,130,45,131,44,132,175,219,174,220,173,221,172,222,171,85,172,84,173,83,174,82,175,81,176,80,177,79,178,78,179,77,180,76,181,75,182,74,183,73,184,72,185,71,186,70,187,69,188,68,189,67,190"
+
+# Run the program and capture output
+OUTPUT=$(./recaman | tr -d '\n')
+
+# Compare actual output with expected output
+if [ "$OUTPUT" = "$EXPECTED" ]; then
+  echo "Recamán test passed!"
+else
+  echo "Recamán test failed. Expected output:"
+  echo $EXPECTED
+  echo "Actual output:"
+  echo $OUTPUT
+  exit 1
+fi
+
+# Clean up
+rm recaman.o recaman
+~~~
+This test case builds the Recamán program using the same commands as before, defines an expected output string containing the first 100 terms of Recamán's sequence, runs the program, captures its output, and compares the actual output with the expected output. If the two strings match, the test passes. Otherwise, the test fails and prints the expected and actual output for comparison.
+
+To run the test case, save it to a file with a .sh extension (e.g. recaman_test.sh), and run the following command:
+~~~
+bash recaman_test.sh
+~~~
