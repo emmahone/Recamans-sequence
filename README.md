@@ -87,3 +87,4 @@ To run the test case, save it to a file with a .sh extension (e.g. recaman_test.
 ~~~
 bash recaman_test.sh
 ~~~
+This will run the test and output either "Recamán test passed!" or "Recamán test failed."
